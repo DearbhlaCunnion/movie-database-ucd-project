@@ -40,6 +40,82 @@
     color: #ddd;
   }
 
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: #1a1a1a;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  
+  nav ul li {
+    margin: 0 15px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  nav ul li a:hover {
+    background-color: #f39c12;
+    color: #121212; 
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-container input {
+    padding: 10px;
+    width: 300px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #222;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .search-container input:focus {
+    border-color: #f39c12;
+  }
+  
+  .search-container button {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .search-container button:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+  }
+  
   footer {
     background-color: #1a1a1a; 
     color: #fff; 
