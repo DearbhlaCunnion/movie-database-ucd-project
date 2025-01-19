@@ -55,6 +55,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px;
   }
   nav ul {
     display: flex;
@@ -79,6 +80,42 @@
     color: #121212; 
   }
 
+  .search-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-container input {
+    padding: 10px;
+    width: 300px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #222;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  
+  .search-container input:focus {
+    border-color: #f39c12;
+  }
+  
+  .search-container button {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .search-container button:hover {
+    background-color: #e67e22;
+    transform: translateY(-2px);
+  }
+  
   footer {
     background-color: #1a1a1a; 
     color: #fff; 
