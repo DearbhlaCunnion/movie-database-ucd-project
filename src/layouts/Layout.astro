@@ -1,4 +1,5 @@
 ---
+import Navbar from '../components/Navbar.astro';
 import '../assets/styles.css'
 ---
 <!DOCTYPE html>
@@ -9,6 +10,9 @@ import '../assets/styles.css'
   <title>Movie DataBase</title>
 </head>
 <body>
+	<header>
+		<Navbar/>
+	  </header>
   <main id="main-content" class="container">
 	<slot/>
   </main>
