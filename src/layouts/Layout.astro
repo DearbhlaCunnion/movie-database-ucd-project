@@ -1,6 +1,6 @@
 ---
 import Navbar from '../components/Navbar.astro';
-import '../assets/styles.css'
+import '../assets/styles.css';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -10,15 +10,14 @@ import '../assets/styles.css'
   <title>Movie DataBase</title>
 </head>
 <body>
-	<header>
-		<Navbar/>
-	  </header>
+  <header>
+    <Navbar />
+  </header>
   <main id="main-content" class="container">
-	<slot/>
+    <slot />
   </main>
-
   <footer>
-	<p>&copy; {new Date().getFullYear()} Dearbhla Cunnion. All rights reserved.</p>
+    <p>&copy; {new Date().getFullYear()} Dearbhla Cunnion. All rights reserved.</p>
   </footer>
 </body>
 </html>
