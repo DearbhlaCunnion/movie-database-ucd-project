@@ -34,7 +34,7 @@ document.getElementById('searchBtn').addEventListener('click', function() {
       movieDiv.classList.add('result');
   
       movieDiv.innerHTML = `
-        <img src="${movie.Poster !== "N/A" ? movie.Poster : "./src/assets/noPoster.svg"}" alt="${movie.Title}" />
+        <img src="${movie.Poster !== "N/A" ? movie.Poster : "src/assets/noPoster.svg"}" alt="${movie.Title}" />
         <div>
           <h3>${movie.Title}</h3>
           <p>Type: ${movie.Type}</p>
