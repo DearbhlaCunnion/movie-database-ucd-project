@@ -1,6 +1,49 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../assets/styles.css';
 ---
-<Layout>
 
+<Layout>
+  <h1>Most Popular Movies Now!</h1>
+
+  <div id="movie-list" class="movie-list"></div>
+
+  <script type="module">
+    const apiKey = '1f5cc1984674fe6c03079be1ed3533d5';
+    const apiUrl = 'https://api.themoviedb.org/3/movie/popular?api_key=' + apiKey + '&language=en-US&page=1';
+
+    async function fetchPopularMovies() {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      
+      if (data.results) {
+        displayMovies(data.results);
+      } else {
+        document.getElementById('movie-list').innerHTML = '<p>No movies found.</p>';
+      }
+    }
+
+    function displayMovies(movies) {
+      const movieListContainer = document.getElementById('movie-list');
+
+      if (movies.length > 0) {
+        movies.forEach((movie) => {
+          const movieDiv = document.createElement('div');
+          movieDiv.classList.add('movie-card');
+          movieDiv.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="movie-poster"/>
+            <div class="movie-details">
+              <h3 class="movie-title">${movie.title}</h3>
+              <p class="movie-rating">IMDb Rating: ${movie.vote_average}</p>
+              <p class="movie-year">Year: ${movie.release_date.substring(0, 4)}</p>
+              <p class="movie-overview">${movie.overview}</p>
+            </div>
+          `;
+          movieListContainer.appendChild(movieDiv);
+        });
+      }
+    }
+    
+    fetchPopularMovies();
+  </script>
 </Layout>
