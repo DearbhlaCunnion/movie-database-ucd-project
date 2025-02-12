@@ -4,18 +4,20 @@ import '../assets/styles.css';
 ---
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Movie DataBase</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie DataBase</title>
+    <script type="module" src="/movie-database-ucd-project/search.js"></script>
+  </head>  
 <body>
   <header>
     <Navbar />
   </header>
   <main id="main-content" class="container">
     <slot />
-  </main>
+    <div id="searchResults"></div> 
+  </main>  
   <footer>
     <p>&copy; {new Date().getFullYear()} Dearbhla Cunnion. All rights reserved.</p>
   </footer>
