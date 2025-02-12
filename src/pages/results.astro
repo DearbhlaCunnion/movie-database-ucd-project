@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <h1>Here's what we found !</h1>
+  <div id="searchResults"></div>
+
+  <script type="module">
+    const params = new URLSearchParams(window.location.search);
+    const query = params.get('query');
+    const apiKey = '1f5cc1984674fe6c03079be1ed3533d5';
+
+    if (query) {
+      fetch(`https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&query=${encodeURIComponent(query)}&language=en-US`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.results && data.results.length > 0) {
+            displayResults(data.results);
+          } else {
+            document.getElementById('searchResults').innerHTML = `<p>No results found for "${query}".</p>`;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          document.getElementById('searchResults').innerHTML = `<p>There was an error processing your request.</p>`;
+        });
+    } else {
+      document.getElementById('searchResults').innerHTML = '<p>No search query provided.</p>';
+    }
+
+    function displayResults(results) {
+      const resultsContainer = document.getElementById('searchResults');
+      resultsContainer.innerHTML = '';
+
+      results.forEach(result => {
+        const movieDiv = document.createElement('div');
+        movieDiv.classList.add('result');
+
+        let posterPath = result.poster_path 
+          ? `https://image.tmdb.org/t/p/w500${result.poster_path}` 
+          : '/src/assets/noPoster.svg';
+
+        movieDiv.innerHTML = `
+          <img src="${posterPath}" alt="${result.title || result.name}" />
+          <div>
+            <h3>${result.title || result.name}</h3>
+            <p>Type: ${result.media_type === 'movie' ? 'Movie' : 'TV Show'}</p>
+            <p>Year: ${result.first_air_date ? result.first_air_date.substring(0, 4) : 'N/A'}</p>
+          </div>
+        `;
+        resultsContainer.appendChild(movieDiv);
+      });
+    }
+  </script>
+</Layout>
