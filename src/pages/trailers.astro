@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <h1>Latest Movie Trailers</h1>
+  <div id="trailer-list" class="trailer-list"></div>
+
+  <script type="module">
+    const apiKey = '1f5cc1984674fe6c03079be1ed3533d5';
+
+    // Function to fetch popular movies to get trailers
+    async function fetchMoviesWithTrailers() {
+      const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`;
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        
+        if (data.results) {
+          data.results.forEach(movie => fetchTrailerForMovie(movie));
+        }
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+        document.getElementById('trailer-list').innerHTML = `<p>There was an error loading trailers.</p>`;
+      }
+    }
+
+    // Function to fetch a trailer for a specific movie
+    async function fetchTrailerForMovie(movie) {
+      const trailerApiUrl = `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${apiKey}&language=en-US`;
+      try {
+        const response = await fetch(trailerApiUrl);
+        const trailerData = await response.json();
+        const trailer = trailerData.results.find(video => video.type === 'Trailer' && video.site === 'YouTube');
+        
+        if (trailer) {
+          displayTrailer(movie, trailer.key);
+        }
+      } catch (error) {
+        console.error(`Error fetching trailer for movie ${movie.title}:`, error);
+      }
+    }
+
+    // Function to display a movie trailer
+    function displayTrailer(movie, trailerKey) {
+      const trailerListContainer = document.getElementById('trailer-list');
+      const trailerDiv = document.createElement('div');
+      trailerDiv.classList.add('trailer-card');
+      trailerDiv.innerHTML = `
+        <h3>${movie.title}</h3>
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/${trailerKey}" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+        <p>Release Date: ${movie.release_date}</p>
+      `;
+      trailerListContainer.appendChild(trailerDiv);
+    }
+
+    fetchMoviesWithTrailers();
+  </script>
+</Layout>
