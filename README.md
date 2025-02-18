@@ -1,48 +1,63 @@
-# Astro Starter Kit: Basics
+# 🎬 Movie Database Website
 
-```sh
-npm create astro@latest -- --template basics
-```
+A dynamic and visually appealing movie database website that provides users with trending, popular, top-rated, and upcoming movie listings. Powered by **The Movie Database (TMDb) API**, this platform allows users to explore movies, view detailed information, and search for their favorite films with ease.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📌 Features
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Home Page:
+- Carousel featuring trending movies of the day.
 
-## 🚀 Project Structure
+### Search Functionality:
+- Search bar for finding movies by title.
+- Real-time results display matching the user's search query.
 
-Inside of your Astro project, you'll see the following folders and files:
+### Movie Detail Page:
+- Quick access to different movie categories: Popular, Top Rated, Trending, and Upcoming.
+- Movie Poster
+- Title
+- Average Rating
+- Release Date
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### Movie Trailer Page:
+- Watch the newest movie trailers.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## 📦 Tech Stack
 
-All commands are run from the root of the project, from a terminal:
+- **Frontend:** HTML5, CSS, JavaScript, Astro
+- **API:** TMDb API for fetching movie data
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+## 🎯 Key Pages
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Home Page:
+- Displays the movie carousel and showcases different movie sections (Popular, Top Rated, Trending, and Upcoming).
+
+### Search Results Page:
+- Allows users to search for movies and displays the matching results.
+
+### Movie Page:
+- Provides detailed information about a selected movie, including its title, rating, synopsis, and release date.
+
+### Movie Trailers Page:
+- Displays the latest released movie trailers.
+
+---
+
+## 🚀 Installation & Setup
+
+The website can be accessed via GitHub Pages at the following link:  
+[Movie Database Website](https://dearbhlacunnion.github.io/movie-database-ucd-project/)
+
+---
+
+## 🛠️ API Integration
+
+The **TMDb API** is used to fetch movie data for the different categories (Popular, Top Rated, Trending, Upcoming).  
+Data is dynamically displayed on the respective pages based on API responses.
+
+---
