@@ -61,3 +61,20 @@ The **TMDb API** is used to fetch movie data for the different categories (Popul
 Data is dynamically displayed on the respective pages based on API responses.
 
 ---
+
+## 📸 Planning Screenshots and Lighthouse Report
+
+### Home Page:
+![Home Page Plan](public/homePagePlanning.png)
+
+### Movies Page:
+![Movies Page Plan](public/moviePagePlanning.png)
+
+### Wesbite on phone:
+![Website on phone Plan](public/phonePlanning.png)
+
+### Lighthouse report:
+![Lighthouse Report](public/lighthouseReport.png)
+
+---
+
