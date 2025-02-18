@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Movie DataBase</title><script type="module" src="/movie-database-ucd-project/search.js"></script><link rel="stylesheet" href="/movie-database-ucd-project/_astro/index.BQHnDYuT.css"></head> <body> <header> <nav> <ul> <li><a href="/movie-database-ucd-project">Home</a></li> <li><a href="/movie-database-ucd-project/movie">Movies</a></li> <li><a href="/movie-database-ucd-project/trailers">Movie Trailers</a></li> </ul> <div class="search-container"> <input type="text" id="searchQuery" placeholder="Search for movies or TV shows..." class="search-bar"> <button id="searchBtn">Search</button> </div> </nav> </header> <main id="main-content" class="container">  <h1>Popular Movies</h1> <div class="category-buttons"> <button id="popular-btn" class="category-btn">Popular</button> <button id="trending-btn" class="category-btn">Trending</button> <button id="top_rated-btn" class="category-btn">Top Rated</button> <button id="upcoming-btn" class="category-btn">Upcoming</button> </div> <div id="movie-list" class="movie-list"></div>  <div class="pagination"> <button id="prev-page" disabled>Previous</button> <span id="current-page">Page 1</span> <button id="next-page">Next</button> </div> <script type="module">
+    const apiKey = '1f5cc1984674fe6c03079be1ed3533d5'; // TMDB API
+    let currentPage = 1;
+    let currentCategory = 'popular';
+
+    // Mapping category names to API endpoints
+
+    const categories = {
+    popular: 'movie/popular',
+    trending: 'trending/movie/day',
+    top_rated: 'movie/top_rated', 
+    upcoming: 'movie/upcoming'
+};
+
+    // Fetch movies from TMDB based on category and page number
+
+    async function fetchMovies(category, page = 1) {
+      const apiUrl = `https://api.themoviedb.org/3/${categories[category]}?api_key=${apiKey}&language=en-US&page=${page}`;
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+      
+      if (data.results) {
+        displayMovies(data.results);
+      } else {
+        document.getElementById('movie-list').innerHTML = '<p>No movies found.</p>';
+      }
+    }
+    // Display fetched movies
+    function displayMovies(movies) {
+      const movieListContainer = document.getElementById('movie-list');
+      movieListContainer.innerHTML = '';
+
+      movies.forEach((movie) => {
+        const movieDiv = document.createElement('div');
+        movieDiv.classList.add('movie-card');
+        movieDiv.innerHTML = `
+          <a href="/movie/${movie.id}">
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="movie-poster"/>
+          </a>
+          <div class="movie-details">
+            <h3 class="movie-title">${movie.title}</h3>
+            <p class="movie-rating">Rating: ${movie.vote_average}</p>
+            <p class="movie-year">Year: ${movie.release_date?.substring(0, 4)}</p>
+          </div>
+        `;
+        movieListContainer.appendChild(movieDiv);
+      });
+    }
+
+    function updatePagination() {
+      document.getElementById('current-page').textContent = `Page ${currentPage}`;
+      document.getElementById('prev-page').disabled = currentPage === 1;
+    }
+
+  // category selection
+  document.querySelectorAll('.category-btn').forEach(button => {
+  button.addEventListener('click', (event) => {
+    currentCategory = event.target.id.replace('-btn', ''); // Matches exact category name
+    currentPage = 1;
+    fetchMovies(currentCategory);
+  });
+});
+
+    // next button click
+    document.getElementById('next-page').addEventListener('click', () => {
+      currentPage++;
+      fetchMovies(currentCategory, currentPage);
+      updatePagination();
+    });
+      //back button click
+    document.getElementById('prev-page').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        fetchMovies(currentCategory, currentPage);
+        updatePagination();
+      }
+    });
+
+    fetchMovies(currentCategory); //display intial movies fetched on page load
+  </script> <div id="searchResults"></div>  <div id="searchResults"></div> </main> <footer> <p>&copy; 2025 Dearbhla Cunnion. All rights reserved.</p> </footer> </body></html>
