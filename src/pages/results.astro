@@ -30,27 +30,28 @@ import Layout from '../layouts/Layout.astro';
     }
 
     function displayResults(results) {
-      const resultsContainer = document.getElementById('searchResults');
-      resultsContainer.innerHTML = '';
+  const resultsContainer = document.getElementById('searchResults');
+  resultsContainer.innerHTML = '';
 
-      results.forEach(result => {
-        const movieDiv = document.createElement('div');
-        movieDiv.classList.add('result');
+  results.forEach(result => {
+    if (result.media_type === 'movie') {  // specify to only display movies
+      const movieDiv = document.createElement('div');
+      movieDiv.classList.add('result');
 
-        let posterPath = result.poster_path 
-          ? `https://image.tmdb.org/t/p/w500${result.poster_path}` 
-          : '/src/assets/noPoster.svg';
+      let posterPath = result.poster_path 
+        ? `https://image.tmdb.org/t/p/w500${result.poster_path}` 
+        : '/src/assets/noPoster.svg';
 
-        movieDiv.innerHTML = `
-          <img src="${posterPath}" alt="${result.title || result.name}" />
-          <div>
-            <h3>${result.title || result.name}</h3>
-            <p>Type: ${result.media_type === 'movie' ? 'Movie' : 'TV Show'}</p>
-            <p>Year: ${result.first_air_date ? result.first_air_date.substring(0, 4) : 'N/A'}</p>
-          </div>
-        `;
-        resultsContainer.appendChild(movieDiv);
-      });
+      movieDiv.innerHTML = `
+        <img src="${posterPath}" alt="${result.title || result.name}" />
+        <div>
+          <h3>${result.title || result.name}</h3>
+          <p>Year: ${result.release_date ? result.release_date.substring(0, 4) : 'N/A'}</p>
+        </div>
+      `;
+      resultsContainer.appendChild(movieDiv);
     }
+  });
+}
   </script>
 </Layout>
